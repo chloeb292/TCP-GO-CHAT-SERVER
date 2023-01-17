@@ -1,0 +1,17 @@
+package chat
+
+type commandID int
+
+const (
+	CMD_NAME commandID = iota
+	CMD_JOIN
+	CMD_ROOMs
+	CMD_MESSAGE
+	CMD_QUIT
+)
+
+type command struct {
+	id     commandID
+	client *client
+	args   []string
+}
