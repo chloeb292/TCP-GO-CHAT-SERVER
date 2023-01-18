@@ -1,11 +1,11 @@
-package chat
+package main
 
 type commandID int
 
 const (
 	CMD_NAME commandID = iota
 	CMD_JOIN
-	CMD_ROOMs
+	CMD_ROOMS
 	CMD_MESSAGE
 	CMD_QUIT
 )
