@@ -5,25 +5,26 @@ import (
 	"net"
 )
 
-func maini() {
-	s := newServer()()
+func main() {
+	s := newServer()
 	go s.run()
 
-	listener, err := net.Listen(("tcp",":8888"))
+	listener, err := net.Listen("tcp", ":8888")
 	if err != nil {
-		log.Printf("unable to accept connection: %s", err.Error())
-		continue
+		log.Fatalf("unable to start server: %s", err.Error())
 	}
 
 	defer listener.Close()
-	log.Printf("server started")
+	log.Printf("server started on :8888")
+
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
-			log.Printf("unabke to accept connection: %s", err.Error())
+			log.Printf("failed to accept connection: %s", err.Error())
 			continue
 		}
-		go s.newClient(conn)
+
+		c := s.newClient(conn)
+		go c.readInput()
 	}
 }
-
